@@ -43,6 +43,13 @@ html {
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--global-color-back);
 }
 
 /*
@@ -132,12 +139,77 @@ body {
     Component: Robot
 */
 
+@keyframes shadowPulse {
+  0% {
+    transform: scale(0.75);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes robothover {
+  0% {
+    transform: translateY(3%);
+  }
+  80% {
+  }
+  100% {
+    transform: translateY(-3%);
+  }
+}
+
+@keyframes fire {
+  0% {
+    transform: scale(1) translateY(-1.5%);
+  }
+  80% {
+  }
+  100% {
+    transform: scale(1.2) translateY(3%);
+  }
+}
+
 .c-robot {
+  max-width: 300px;
+  fill: var(--global-html-color);
+  --c-robot-animation-duration: 0.9s;
+  --c-robot-animation-timing-function: ease-in-out;
+  --c-robot-animation-direction: alternate;
+  --c-robot-animation-iteration-count: infinite;
+}
+
+.c-robot--css-anim #Robot {
+  animation-name: robothover;
+  animation-duration: var(--c-robot-animation-duration);
+  animation-direction: var(--c-robot-animation-direction);
+  animation-iteration-count: var(--c-robot-animation-iteration-count);
+  animation-timing-function: var(--c-robot-animation-timing-function);
+}
+
+.c-robot--css-anim #Shadow {
+  transform-origin: 50% 100%;
+  animation-name: shadowPulse;
+  animation-duration: var(--c-robot-animation-duration);
+  animation-direction: var(--c-robot-animation-direction);
+  animation-iteration-count: var(--c-robot-animation-iteration-count);
+  animation-timing-function: var(--c-robot-animation-timing-function);
+}
+
+.c-robot--css-anim #Fire {
+  transform-origin: 50% 100%;
+  animation-name: fire;
+  animation-duration: var(--c-robot-animation-duration);
+  animation-direction: var(--c-robot-animation-direction);
+  animation-iteration-count: var(--c-robot-animation-iteration-count);
+  animation-timing-function: var(--c-robot-animation-timing-function);
 }
 
 .c-robot__shadow {
+  fill: var(--c-robot__shadow-fill, black);
+  opacity: 0.1;
 }
-
 
 /*
     Component: Controls
@@ -174,18 +246,18 @@ body {
     text-decoration: underline;
   }
   a[href]:after {
-    content: ' (' attr(href) ')';
+    content: " (" attr(href) ")";
   }
   abbr[title]:after {
-    content: ' (' attr(title) ')';
+    content: " (" attr(title) ")";
   }
   /*
     * Don't show links that are fragment identifiers,
     * or use the `javascript:` pseudo protocol
     */
-  a[href^='#']:after,
-  a[href^='javascript:']:after {
-    content: '';
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
   }
   pre {
     white-space: pre-wrap !important;
